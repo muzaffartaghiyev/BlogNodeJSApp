@@ -1,0 +1,26 @@
+{% posts.forEach(post => { %}
+  <article class="blog-post">
+    <h2 class="display-5 mb-1">
+      <h1
+        class=""
+      >
+        {%= post.title %}
+    </h1>
+    </h2>
+    <p class="blog-post-meta">
+      {%= post.createdAt.toUTCString().substring(0,16) %}
+    </p>
+    <p>
+      {%= post.content.substring(0,400) %}
+      <a href="/view/posts/{%= post._id %}" class="text-primary" type="button">... read more</>
+    </p>
+    <div class="admin-area text-end">
+      <a class="btn btn-sm btn-primary" href="/view/posts/{%= post._id %}/update">Update</a>
+      <a
+        class="btn btn-sm btn-danger"
+        href="/view/posts/{%= post._id %}/delete"
+        onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </article>
+{% }) %}
+

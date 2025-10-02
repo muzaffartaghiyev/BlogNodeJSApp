@@ -1,0 +1,8 @@
+<!-- Blog Categories -->
+<div class="nav-scroller py-1 mb-3 border-bottom">
+  <nav class="nav nav-underline justify-content-between">
+    {% categories.forEach((category,index) => { %}
+        <a class="nav-item nav-link link-body-emphasis {%= (selectedCategoryId ? category._id.toString() === selectedCategoryId : index ===0) ?  'text-primary'  : '' %}" href="?filter[blogCategoryId]={%= category._id%}"> {%= category.name %}</a>
+    {% }) %}
+  </nav>
+</div>

@@ -1,0 +1,69 @@
+{%- include('components/header') %}
+</div>
+<!-- main start -->
+<main class="container">
+    <div class="row g-5">
+        <div class="col-md-12 p-3">
+            <p>
+                <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
+            </p>
+            <h1>Title</h1>
+            <form method="POST">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th># {%= post?._id%}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Category</td>
+                            <td>
+                                <select name="blogCategoryId" class="form-select">
+                                    {% categories.forEach(category => { %}
+                                    <option value="{%= category._id %}"
+                                        {%= category._id.toString() === post?.blogCategoryId?._id.toString() ? "selected" : '' %}
+                                    >
+
+                                        {%= category.name %}
+                                    </option>
+                                    {% }) %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td><input type="text" name="title" required class="form-control" value="{%= post?.title%}"></td>
+                        </tr>
+                        <tr>
+                            <td>Content</td>
+                            <td>
+                                <textarea name="content" class="form-control">{%= post?.content%}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Published</td>
+                            <td>
+                                <select name="isPublished" class="form-select">
+                                    <option value="0" {%= post?.isPublished ? "" : "selected" %}>No</option>
+                                    <option value="1" {%= post?.isPublished ? "selected" : "" %}>Yes</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Created Date</td>
+                            <td> {%= post?.createdAt.toUTCString().substring(0,16) %} </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <button class="btn btn-primary" type="submit">SUBMIT</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- main end -->
+
+{%- include('components/footer') %}
