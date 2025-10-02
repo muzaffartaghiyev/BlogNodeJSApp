@@ -1,15 +1,27 @@
 <nav class="blog-pagination mt-5" aria-label="Pagination">
-  <a class="btn btn-outline-secondary rounded-pill" href="#"><</a>
-  <a class="btn btn-outline-primary rounded-pill" href="#">1</a>
-  <a class="btn btn-outline-secondary rounded-pill">2</a>
-  <a class="btn btn-outline-secondary rounded-pill">3</a>
+  <a class="btn btn-outline-secondary rounded-pill {%= details.pages.previous ? '' : 'disabled'%}" href="?page=1{%= pageUrl %}"><</a>
+  
 
-  <span>...</span>
+  {% if (details.pages.current > 3) { %}
+      <span>...</span>
+  {% } %}
+
+
+  {% for (index in details.pages.list ) { %}
+      <a class="btn rounded-pill {%= details.pages.current === details.pages.list[index] ? 'btn-outline-primary' : 'btn-outline-secondary'%}" href="?page={%= details.pages.list[index] + pageUrl%}">{%= details.pages.list[index] %}</a>
+  {% } %}
+  
+
+  {% if (details.pages.current < details.pages.total - 3 ) { %}
+      <span>...</span>
+  {% } %}
+  
+  <a class="btn btn-outline-secondary rounded-pill {%= details.pages.next ?'' : 'disabled' %}" href="?page={%= details.pages.total + pageUrl%}">></a>
 
  
-  <a class="btn btn-outline-secondary rounded-pill" href="#">18</a>
-  <a class="btn btn-outline-secondary rounded-pill">19</a>
-  <a class="btn btn-outline-secondary rounded-pill">20</a>
-   <a class="btn btn-outline-secondary rounded-pill" href="#">></a>
+  <!-- <a class="btn btn-outline-secondary rounded-pill" href="#">{%= details.pages.total - 2 %}</a>
+  <a class="btn btn-outline-secondary rounded-pill">{%= details.pages.total - 1 %}</a>
+  <a class="btn rounded-pill {%= details.pages.current === 42 ? 'btn-outline-primary' : 'btn-outline-secondary'%}">{%= details.pages.total%}</a> -->
+   
 </nav>
 <p class="text-end p-2 border-top">Total 5 Posts</p>

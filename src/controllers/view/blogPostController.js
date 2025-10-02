@@ -6,17 +6,30 @@
 const BlogPost = require("../../models/blogPostModel");
 const BlogCategory = require("../../models/blogCategoryModel");
 
+const removeQueryParam = require("../../helpers/removeQueryParam")
+
 module.exports = {
   list: async (req, res) => {
     const posts= await res.getModelList(BlogPost,{isPublished:true},"blogCategoryId")
 
     const selectedCategoryId = req.query.filter?.blogCategoryId || ''
 
+    const details = await res.getModelListDetails(BlogPost,{isPublished:true})
+
     const categories = await BlogCategory.find()
     const recentPosts = await BlogPost.find().sort({createdAt:"desc"}).limit(4)
 
+    let pageUrl = ''
 
-    res.render("index",{categories,recentPosts, posts, selectedCategoryId})
+
+    const queryString = req.originalUrl.split("?")[1]
+
+    if(queryString) pageUrl = removeQueryParam(queryString,'page')
+
+    pageUrl = pageUrl ? '&' + pageUrl : ''
+
+
+    res.render("index",{categories,recentPosts, posts, selectedCategoryId, details,pageUrl})
   },
 
   create: async (req, res) => {
