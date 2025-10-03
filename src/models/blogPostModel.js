@@ -14,7 +14,7 @@ const blogPostSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.ObjectId, // Relational ObjectId
       ref: "User", // ModelName
-      // required: true,
+      required: true,
     },
 
     blogCategoryId: {

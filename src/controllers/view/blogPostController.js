@@ -34,6 +34,7 @@ module.exports = {
 
   create: async (req, res) => {
     if (req.method == "POST") {
+      req.body.userId = req.session.user.id
       const data = await BlogPost.create(req.body);
       if (data) res.redirect("/view/posts");
     } else {

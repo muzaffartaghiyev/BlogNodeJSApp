@@ -5,11 +5,15 @@
     <div class="row g-5">
         <div class="col-md-12 p-3">
             <!-- BlogPost Read -->
-            <div class="admin-area text-end">
-                <a class="btn btn-sm btn-primary" href="/view/posts/{%= post._id%}/update">Update</a>
-                <a class="btn btn-sm btn-danger" href="/view/posts/{%= post._id%}/delete" onclick="return confirm('Are you sure?')">Delete</a>
-                Published: {%= post.isPublished %}
-            </div>
+
+            {% if(user && user.id === post.userId.toString()) { %}
+                <div class="admin-area text-end">
+                    <a class="btn btn-sm btn-primary" href="/view/posts/{%= post._id%}/update">Update</a>
+                    <a class="btn btn-sm btn-danger" href="/view/posts/{%= post._id%}/delete" onclick="return confirm('Are you sure?')">Delete</a>
+                    Published: {%= post.isPublished %}
+                </div>
+            {% } %}
+            
             <article class="blog-post">
                 <a href="/view/posts?filter[blogCategoryId]={%= post.blogCategoryId._id%}"># {%= post.blogCategoryId.name %}</a>
                 <h2 class="display-5 mb-1">

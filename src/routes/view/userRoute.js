@@ -25,7 +25,7 @@ const User = require("../../controllers/view/userController");
 // Handle login (POST for form submission)
 router.route("/login").post(User.login).get(User.login);
 // Handle logout (POST since it involves action)
-router.post("/logout", User.logout);
+router.get("/logout", User.logout);
 
 // User management routes
 // Get the list of users
