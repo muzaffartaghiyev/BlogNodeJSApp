@@ -39,7 +39,7 @@
                         <tr>
                             <td>Content</td>
                             <td>
-                                <textarea name="content" class="form-control">{%= post?.content%}</textarea>
+                                <textarea name="content" id="tinymceEditor" class="form-control">{%= post?.content%}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -68,5 +68,18 @@
     </div>
 </main>
 <!-- main end -->
+
+<script type="application/javascript" src="/tinymce/tinymce.min.js"></script>
+
+<script type="application/javascript">
+
+    tinymce.init({
+        selector:"textarea#tinymceEditor",
+        plugins:"lists link image table code wordcount",
+        height:750,
+    })
+
+</script>
+
 
 {%- include('components/footer') %}
